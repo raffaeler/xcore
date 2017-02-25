@@ -11,6 +11,9 @@ Introducing xcore
 
 ----------
 
+[![demo video](https://github.com/raffaeler/xcore/blob/master/screenshot-video-demo.png)](https://www.youtube.com/watch?v=UL8Lx3aDh44)
+
+
 
 ###What is xcore###
 xcore is a [Node.js](https://nodejs.org)® plugin enabling the use of .NET [netstandard](https://github.com/dotnet/standard/) libraries with javascript.
