@@ -5,10 +5,15 @@ Introducing xcore
 ----------
 
 Now published in pre-release (alpha). Not suitable for production code yet.
+
 Current version: 1.0.1-alpha.4
+
 OS Support: Windows 10 x64 (more will come in the future)
+
 Node version: Tested with Node 6.5.0
+
 Install
+
 ```
 npm install xcorenode
 ```
@@ -20,7 +25,7 @@ Once installed you can find sample javascript files in the node_modules/xcorenod
 
 
 
-###What is xcore###
+### What is xcore ###
 
 xcore is a [Node.js](https://nodejs.org)® plugin enabling the use of .NET [netstandard](https://github.com/dotnet/standard/) libraries with javascript.
 netstandard is a new specification by Microsoft representing a set of .NET API which can be used across many .NET implementations such as .NET Framework and .NET Core.
@@ -31,7 +36,7 @@ xcore is entirely authored by Raffaele Rialdi  -  @raffaeler
 
 Please refer to the [repo github issues](https://github.com/raffaeler/xcore/issues) to report bugs, ask questions or suggestions.
 
-###Show me the code ...###
+### Show me the code ... ###
 
 Load and initialize xcore
 
@@ -72,7 +77,7 @@ Unsubcscribe events
 
 Much more is supported!
 
-###Features already implemented###
+### Features already implemented ###
 
  - Creating .NET objects – calling constructors
 	 - Constructors and methods supports overloads
@@ -86,11 +91,11 @@ Much more is supported!
  - Automatic upcasting and downcasting
 	 - In the event sample, the "sender" is an object, but is downcasted to the runtime object
 
-###How does it work?###
+### How does it work? ###
 
 N/A
 
-###xcore on the C++ side###
+### xcore on the C++ side ###
 
 - C++ layer is invisible to both JS and .NET developers
 - Host the CoreCLR and load the required infrastructure
@@ -111,7 +116,7 @@ N/A
 - Calls back the C++ code with the responses (PInvoke)
 - A special treatment is done for asynchronous calls
 
-###Asynchronous code - promises  -  async / await###
+### Asynchronous code - promises  -  async / await ###
 - V8 engine uses libuv to manage the threading story
 - Javascript / Node.js / V8 must execute code in the one and only specific thread
 - The xcore plugin leverages the V8 engine to "fix" the calls from different threads
@@ -120,7 +125,7 @@ N/A
 - Two arguments (functions) are added at the end of the signature of the JS proxy
 	- onSuccess and onError will be called, if provided, as soon as the results are available
 
-####Events###
+#### Events ###
 - Javascript has no direct support for events
 - The xcore plugin add two members to all the proxied objects:
 
@@ -134,12 +139,12 @@ N/A
     removeEventHandler("OrderReady", cookie);
 
 - The program execution will not end until all the subscriptions are correctly unsubscribed.
-###Performance profile###
+### Performance profile ###
 - There are still many improvements that can be done
 - The add use-case is not realistic and is used to measure the infrastructure
 	- Four marshaling operations will be always needed (JS -> C++ -> .NET -> C++ -> JS)
 
-####Initialization code####
+#### Initialization code ####
 
     var om = new xcore.OrderManager();
     
@@ -151,7 +156,7 @@ N/A
     function LocalAdd(x, y)
         { return x+y; }
 
-####Javascript only####
+#### Javascript only ####
 
     console.time("js");
     for(var i=0; i<loop; i++)
@@ -160,7 +165,7 @@ N/A
     }
     console.timeEnd("js");
 
-####C++ static function, optimized ad-hoc Add####
+#### C++ static function, optimized ad-hoc Add ####
 
     console.time("c++");
     for(var i=0; i<loop; i++)
@@ -168,7 +173,7 @@ N/A
         xcore.add(i, i);
     }
     console.timeEnd("c++");
-####.NET Add performed via xcore####
+#### .NET Add performed via xcore ####
 
     console.time("net");
     for(var i=0; i<loop; i++)
@@ -177,12 +182,12 @@ N/A
     }
     console.timeEnd("net");
 
-####Results for 1 million calls####
+#### Results for 1 million calls ####
 
     	  js:	 6.156 ms
     	 c++:	56.352 ms
     	.net: 1294.254 ms
-###Performance considerations###
+### Performance considerations ###
 - The "Add" case is the worst possible case
 	- JS code is compiled to machine code
 	- C++ code is optimized but we pay the cost of V8 engine (parameters marshaling)
@@ -191,14 +196,14 @@ N/A
 		- We still have to find the right instance to call the NetAdd method on
 -	More can be done by branching and modifying the CLR itself
 	-	Certainly not coming soon (if ever)
-###Use-cases###
+### Use-cases ###
 1. Node.js applications
 2. UI created with the [Electron framework](http://electron.atom.io)
 3. Using JS to script Windows Powershell
 4. [Nativescript](https://www.nativescript.org/) Mobile applications
 5. Anything else based on V8
 
-###Possible future steps###
+### Possible future steps ###
 - Port the whole thing on Linux and mobile platforms
 - Create Typescript mappings automatically
 - Support straight delegates to support reactive extensions like paradigm (easy to do, the event infrastructure already provides the needed infrastructure)
@@ -209,11 +214,10 @@ N/A
 - Specialized plugin to use Javascript to script Windows Powershell
 - Other dark secret plans :)
 
-###Source code###
+### Source code ###
 I have no current plans to release the source code for xcode.
-###Release date###
-There are still issues I have to fix before making it a stable thing that can be used in production. Basically I have to carefully check for memory leaks problems and fixing lifecycle issues.
-For this reason I did not release the plugin at this moment.
+
+### Release date ###
 Follow this repo or myself on twitter [@raffaeler](https://twitter.com/raffaeler) for any news.
 ###Suggestions and requests###
 Please open an issue on this GitHub repo to ask, discuss and propose anything about xcore.
