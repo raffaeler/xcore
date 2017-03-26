@@ -4,10 +4,15 @@ Introducing xcore
 
 ----------
 
-
-**Please be aware there are no binaries available yet**
-**I am still working on the project, but feedback and wishes are welcome**
-
+Now published in pre-release (alpha). Not suitable for production code yet.
+Current version: 1.0.1-alpha.4
+OS Support: Windows 10 x64 (more will come in the future)
+Node version: Tested with Node 6.5.0
+Install
+```
+npm install xcorenode
+```
+Once installed you can find sample javascript files in the node_modules/xcorenode
 
 ----------
 
@@ -16,23 +21,27 @@ Introducing xcore
 
 
 ###What is xcore###
-xcore is a [Node.js](https://nodejs.org)® plugin enabling the use of .NET [netstandard](https://github.com/dotnet/standard/) libraries with javascript.
 
- - Node.js® is a well-known runtime environment https://nodejs.org for javascript
- - netstandard is a new specification by Microsoft representing a set of .NET API which can be used across many .NET implementations such as .NET Framework and .NET Core.
+xcore is a [Node.js](https://nodejs.org)® plugin enabling the use of .NET [netstandard](https://github.com/dotnet/standard/) libraries with javascript.
+netstandard is a new specification by Microsoft representing a set of .NET API which can be used across many .NET implementations such as .NET Framework and .NET Core.
 	 - https://github.com/dotnet/standard
 
 Basically xcore allows any Node.js script to use .NET code.
 xcore is entirely authored by Raffaele Rialdi  -  @raffaeler 
 
+Please refer to the [repo github issues](https://github.com/raffaeler/xcore/issues) to report bugs, ask questions or suggestions.
+
 ###Show me the code ...###
 
 Load and initialize xcore
 
-    var xcore = require('bindings')('xcore');
-    xcore.initialize(__dirname + "\\Sample",
-        "SampleLibrary.dll", "SampleLibrary.Initializer");
-        
+```
+var xcore = require(__dirname + '\\node_modules\\xcorenode\\xcorenode.node');
+var netPath = __dirname + "\\node_modules\\xcorenode\\binw10x64";
+// load the dll (initializer is optional), then load the class OrderManager (full qualified name)
+xcore.initialize(netPath, "SampleLibrary.dll", "SampleLibrary.Initializer");
+```
+         
 Load the .net metadata. This operation is done for just the entry-point class of a graph.
 
     xcore.loadClass("SampleLibrary.OrderSample.    OrderManager, SampleLibrary");
