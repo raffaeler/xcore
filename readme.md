@@ -6,7 +6,7 @@ Introducing xcore
 
 Now published in pre-release (alpha). Not suitable for production code yet.
 
-Current version: 1.0.1-alpha.4
+Current version: 1.0.1-alpha.5
 
 OS Support: Windows 10 x64 (more will come in the future)
 
